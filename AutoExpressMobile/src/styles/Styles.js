@@ -74,8 +74,8 @@ const Styles = StyleSheet.create({
         alignItems: 'center',
     },
     logo: {
-        width: 100,
-        height: 100
+        width: 330,
+        height: 200
     },
      smallLogo: {
         width: 70,
@@ -83,7 +83,7 @@ const Styles = StyleSheet.create({
     },
     formContainer: {
         flexDirection: 'column',
-        margin: 10,
+        margin: 20,
     },
     subContainer: {
         flexGrow: 10,

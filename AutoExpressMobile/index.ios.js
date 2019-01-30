@@ -1,1 +1,1 @@
-import Login from './src/components/App';
+import Login from './src/components/login/Login';
