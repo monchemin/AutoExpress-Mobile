@@ -1,3 +1,4 @@
+//toDo : scroll of this form, navigation to registerForm
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -19,7 +20,7 @@ class Login extends Component {
   };*/
   render() {
     //const { navigate } = this.props.navigation;
-    return (
+    return ( 
       <KeyboardAvoidingView behavior="padding" style={Styles.container}>
        
        <View style={Styles.logoContainer}>
@@ -32,16 +33,15 @@ class Login extends Component {
 
        <View style={Styles.formContainer}>
           <TextInput style={Styles.inputLogin}
-           placeholder=""
+           placeholder="Entrer Votre Compte ..."
            returnKeyType="default"
            onSubmitEditing={() => this.passwordInput.focus()}
           />
           <TextInput style={Styles.inputLogin}
-           placeholder=""
+           placeholder="Entrer Votre Mot de Passe ..."
            secureTextEntry = {true}
            returnKeyType="default"
            ref={(input) => this.passwordInput = input}
-           keyboardType = "email-address"
            autoCapitalize="none"
            autoCorrect={false}
           />
@@ -50,7 +50,7 @@ class Login extends Component {
               <Text style={Styles.buttonText}>LOGIN</Text>
             </TouchableOpacity>
             <TouchableOpacity style={Styles.buttonRightContainer}>
-              <Text style={Styles.buttonText}>REGISTER</Text>
+              <Text style={Styles.buttonText}>S'ENREGISTRER</Text>
             </TouchableOpacity>
           </View>
 
