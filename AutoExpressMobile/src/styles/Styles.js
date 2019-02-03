@@ -185,6 +185,11 @@ const Styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '700',
         color: '#222222'
+    },
+    errorTitleRed: {
+        fontSize: 10,
+        fontWeight: 'bold',
+        color: '#C60030'
     }
 });
 
