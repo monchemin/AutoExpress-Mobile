@@ -1,4 +1,4 @@
-//toDo : scroll of this form, navigation to registerForm
+//toDo :  -- react-native link react-native-gesture-handler when navigation don't work
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -9,17 +9,37 @@ import {
   Button,
   TouchableOpacity,
   TextInput,
-  TouchableHighlight,
-  AppRegistry
+  TouchableHighlight
 } from 'react-native';
+import { 
+  TabNavigator,
+  createStackNavigator,
+  createAppContainer,
+  StackActions, 
+  NavigationActions
+} from 'react-navigation';
 import Styles from '../../styles/Styles';
+import RegisterForm from './RegisterForm';
 
 class Login extends Component {
   /*static navigationOptions = {
     title: 'Login / Register',
   };*/
+
+  constructor(props) {
+    super(props);
+  }
+
+  callRegisterForm() {
+    this.props.navigation.dispatch(StackActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'RegisterForm' })
+          ]
+        }))
+  }
+
   render() {
-    //const { navigate } = this.props.navigation;
     return ( 
       <KeyboardAvoidingView behavior="padding" style={Styles.container}>
        
@@ -49,7 +69,7 @@ class Login extends Component {
             <TouchableOpacity style={Styles.buttonLeftContainer}>
               <Text style={Styles.buttonText}>LOGIN</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={Styles.buttonRightContainer}>
+            <TouchableOpacity style={Styles.buttonRightContainer} onPress={this.callRegisterForm.bind(this)}>
               <Text style={Styles.buttonText}>S'ENREGISTRER</Text>
             </TouchableOpacity>
           </View>
@@ -62,6 +82,15 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const RootNavigator = createStackNavigator({
+  Login: {
+    screen: Login,
+  },
+  RegisterForm: {
+    screen: RegisterForm,
+  },
+}, {
+    initialRouteName: 'Login',
+});
 
-AppRegistry.registerComponent('AutoExpressMobile', () => Login);
+export default createAppContainer(RootNavigator);
