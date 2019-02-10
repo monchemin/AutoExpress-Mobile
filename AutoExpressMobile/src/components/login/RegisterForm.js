@@ -1,7 +1,3 @@
-//toDo : joli message pupUp rouge pour les erreurs et move pour les messages de confirmation
-//       afficher conirmation uniquemnet lorsque c'est necesssaire
-//       derniere validation du formulaire onSubmit()
-//       vider toutes les entrées apres l'ajout
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -340,5 +336,3 @@ class RegisterForm extends Component {
 }
 
 export default RegisterForm;
-
-AppRegistry.registerComponent('AutoExpressMobile', () => RegisterForm);

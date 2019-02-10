@@ -1,4 +1,5 @@
 //toDo :  -- react-native link react-native-gesture-handler when navigation don't work
+//JSON data and send it to API
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -20,6 +21,7 @@ import {
 } from 'react-navigation';
 import Styles from '../../styles/Styles';
 import RegisterForm from './RegisterForm';
+import HomeApp from '../HomeApp';
 
 class Login extends Component {
   /*static navigationOptions = {
@@ -28,15 +30,84 @@ class Login extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      compteInput: "",
+      compteError: "",
+      passwordInput: "",
+      passwordError: "",
+      inputError: "",
+      responseData: "",
+      responseError: ""
+    };
   }
 
-  callRegisterForm() {
+  callForm(form) {
     this.props.navigation.dispatch(StackActions.reset({
           index: 0,
           actions: [
-            NavigationActions.navigate({ routeName: 'RegisterForm' })
+            NavigationActions.navigate({ routeName: form })
           ]
         }))
+  }
+
+  authenticationCheck() {
+    //last validation 
+    this.inputControle(this.state.compteInput, 'compteInput');
+    this.inputControle(this.state.passwordInput, 'passwordInput');
+
+    if (this.state.errorInput === 0) {
+      fetch('http://autoexpress.gabways.com/api/customer.php', {
+        method: 'POST',
+        headers: { 
+         'Accept': 'application/json', 
+         'Content-Type': 'application/json',
+        },
+        body: registerData
+
+        }).then((response) => response.json())
+          .then((responseJson) => { 
+            this.setState({ responseData: responseJson }); 
+            if (responseJson.errorMessage) {
+             alert (responseJson.errorMessage);
+            }
+            else {
+              this.callForm('HomeApp');
+            }
+          })
+          .catch((err) => { this.setState({ responseError: err });});
+      } 
+  }
+
+    inputControle(inputValue, inputName){
+    var errorInput = '0';
+    switch(inputName) {
+      
+      case 'compteInput':
+      var compteError = '';
+        if(!inputValue){
+          compteError = 'Compte requis';
+          errorInput = '1';
+        }
+        this.setState({
+            errorInput: errorInput,
+            compteError: compteError,
+            compteInput: inputValue
+          });
+        break;
+
+      case 'passwordInput':
+      var passwordError = '';
+        if(!inputValue){
+          errorInput = '1';
+          passwordError = 'Mot de passe requis';
+        }
+        this.setState({
+            errorInput: errorInput,
+            passwordError: passwordError,
+            passwordInput: inputValue
+          })
+        break;
+    } 
   }
 
   render() {
@@ -52,24 +123,38 @@ class Login extends Component {
 	     </View>
 
        <View style={Styles.formContainer}>
+          <Text style={Styles.errorTitleRed}>{this.state.compteError}</Text>
           <TextInput style={Styles.inputLogin}
-           placeholder="Entrer Votre Compte ..."
-           returnKeyType="default"
-           onSubmitEditing={() => this.passwordInput.focus()}
-          />
+          placeholder="Entrer Votre Compte ..."
+          returnKeyType="default"
+          value={this.state.compteInput}
+          onChangeText={(text) => {
+            this.inputControle(text, 'compteInput');
+          }}
+          onSubmitEditing={(event) => {
+            this.inputControle(event.nativeEvent.text, 'compteInput');
+          }}
+         />
+          <Text style={Styles.errorTitleRed}>{this.state.passwordError}</Text>
           <TextInput style={Styles.inputLogin}
            placeholder="Entrer Votre Mot de Passe ..."
            secureTextEntry = {true}
            returnKeyType="default"
-           ref={(input) => this.passwordInput = input}
            autoCapitalize="none"
            autoCorrect={false}
+           value={this.state.passwordInput}
+           onChangeText={(text) => {
+            this.inputControle(text, 'passwordInput');
+           }}
+           onSubmitEditing={(event) => {
+            this.inputControle(event.nativeEvent.text, 'passwordInput');
+           }}
           />
           <View style={Styles.buttonViewContainer}>
-            <TouchableOpacity style={Styles.buttonLeftContainer}>
+            <TouchableOpacity style={Styles.buttonLeftContainer} onPress={this.authenticationCheck.bind(this)}>
               <Text style={Styles.buttonText}>LOGIN</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={Styles.buttonRightContainer} onPress={this.callRegisterForm.bind(this)}>
+            <TouchableOpacity style={Styles.buttonRightContainer} onPress={this.callForm.bind(this,'RegisterForm')}>
               <Text style={Styles.buttonText}>S'ENREGISTRER</Text>
             </TouchableOpacity>
           </View>
@@ -84,13 +169,17 @@ class Login extends Component {
 
 const RootNavigator = createStackNavigator({
   Login: {
-    screen: Login,
+    screen: Login
   },
   RegisterForm: {
-    screen: RegisterForm,
+    screen: RegisterForm
   },
-}, {
-    initialRouteName: 'Login',
+  HomeApp: {
+    screen: HomeApp
+  },
+}, 
+{
+  initialRouteName: 'Login'
 });
 
 export default createAppContainer(RootNavigator);
