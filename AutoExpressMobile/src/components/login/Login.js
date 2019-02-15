@@ -56,6 +56,10 @@ class Login extends Component {
     this.inputControle(this.state.passwordInput, 'passwordInput');
 
     if (this.state.errorInput === 0) {
+      var registerData = JSON.stringify({
+        checkLogin: this.state.compteInput,
+        //customerPassword: this.state.passwordInput
+      });
       fetch('http://autoexpress.gabways.com/api/customer.php', {
         method: 'POST',
         headers: { 
@@ -66,27 +70,27 @@ class Login extends Component {
 
         }).then((response) => response.json())
           .then((responseJson) => { 
-            this.setState({ responseData: responseJson }); 
-            if (responseJson.errorMessage) {
-             alert (responseJson.errorMessage);
-            }
-            else {
+            this.setState({ responseData: responseJson });
+            if (responseJson.loginExists) {
               this.callForm('HomeApp');
+            }
+            else { 
+              alert ("Compte ou mot de passe incorrect");
             }
           })
           .catch((err) => { this.setState({ responseError: err });});
-      } 
+      }
   }
 
     inputControle(inputValue, inputName){
-    var errorInput = '0';
+    var errorInput = 0;
     switch(inputName) {
       
       case 'compteInput':
       var compteError = '';
         if(!inputValue){
           compteError = 'Compte requis';
-          errorInput = '1';
+          errorInput = 1;
         }
         this.setState({
             errorInput: errorInput,
@@ -98,7 +102,7 @@ class Login extends Component {
       case 'passwordInput':
       var passwordError = '';
         if(!inputValue){
-          errorInput = '1';
+          errorInput = 1;
           passwordError = 'Mot de passe requis';
         }
         this.setState({
@@ -127,6 +131,7 @@ class Login extends Component {
           <TextInput style={Styles.inputLogin}
           placeholder="Entrer Votre Compte ..."
           returnKeyType="default"
+          autoCapitalize="none"
           value={this.state.compteInput}
           onChangeText={(text) => {
             this.inputControle(text, 'compteInput');

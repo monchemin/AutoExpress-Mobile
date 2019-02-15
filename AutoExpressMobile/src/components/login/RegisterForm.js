@@ -77,7 +77,7 @@ class RegisterForm extends Component {
 
       }).then((response) => response.json())
         .then((responseJson) => { 
-          this.setState({ responseData: responseJson }); 
+          this.setState({ responseData: responseJson });
           if (responseJson.errorMessage) {
            alert (responseJson.errorMessage);
           }
@@ -92,14 +92,14 @@ class RegisterForm extends Component {
   }
 
   inputControle(inputValue, inputName){
-    var errorInput = '0';
+    var errorInput = 0;
     switch(inputName) {
       
       case 'prenomInput':
       var prenomError = '';
         if(!inputValue){
           prenomError = 'Prenom requis';
-          errorInput = '1';
+          errorInput = 1;
         }
         this.setState({
             errorInput: errorInput,
@@ -111,7 +111,7 @@ class RegisterForm extends Component {
       case 'nomInput':
       var nomError = '';
         if(!inputValue){
-          errorInput = '1';
+          errorInput = 1;
           nomError = 'Prenom requis';
         }
         this.setState({
@@ -124,7 +124,7 @@ class RegisterForm extends Component {
       case 'telephoneInput':
       var telephoneError = '';
         if(!inputValue){
-          errorInput = '1';
+          errorInput = 1;
           telephoneError = 'Telephone requis';
         }
         this.setState({
@@ -138,7 +138,7 @@ class RegisterForm extends Component {
       var emailError = '';
         if(!inputValue || !inputValue.includes("@")) {
           emailError = 'Email requis ou incorrect';
-          inputError = '1';
+          inputError = 1;
           this.setState({
             errorInput: 'error',
             emailError: 'Email requis ',
@@ -154,7 +154,7 @@ class RegisterForm extends Component {
       case 'compteInput':
       var compteError = '';
         if(!inputValue){
-          errorInput = '1';
+          errorInput = 1;
           compteError = 'Compte requis';
         }
         this.setState({
@@ -180,7 +180,7 @@ class RegisterForm extends Component {
       case 'password2Input':
       var passwordError = '';
         if(!inputValue || inputValue != this.state.passwordInput){
-          errorInput = '1';
+          errorInput = 1;
           passwordError = 'Erreur confirmation mot de passe';
         }
         else {
