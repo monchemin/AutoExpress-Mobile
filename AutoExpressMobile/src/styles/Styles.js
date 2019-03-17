@@ -190,6 +190,24 @@ const Styles = StyleSheet.create({
         fontSize: 10,
         fontWeight: 'bold',
         color: '#C60030'
+    },
+    navContainer: {
+    paddingTop: 20,
+    flex: 1
+  },
+    navItemStyle: {
+    padding: 10
+    },
+    navSectionStyle: {
+      backgroundColor: 'lightgrey'
+    },
+    sectionHeadingStyle: {
+      paddingVertical: 10,
+      paddingHorizontal: 5
+    },
+    footerContainer: {
+      padding: 20,
+      backgroundColor: 'lightgrey'
     }
 });
 
