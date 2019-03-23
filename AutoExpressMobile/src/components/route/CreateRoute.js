@@ -251,7 +251,6 @@ class CreateRoute extends Component {
               })
               .catch((err) => { this.setState({ stageDatasError: err });})
           );
-          console.log('lolSate', this.props.navigation.state.params.userId);
   }
 
   render() {

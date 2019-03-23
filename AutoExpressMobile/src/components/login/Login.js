@@ -23,6 +23,7 @@ import Styles from '../../styles/Styles';
 import RegisterForm from './RegisterForm';
 import HomeApp from '../HomeApp';
 import CreateRoute from '../route/CreateRoute';
+import Driver from '../driver/Driver';
 
 class Login extends Component {
   /*static navigationOptions = {
@@ -75,7 +76,7 @@ class Login extends Component {
           .then((responseJson) => { 
             this.setState({ responseData: responseJson });
             if (responseJson.isLog) {
-              this.callForm('CreateRoute');
+              this.callForm('Driver');
             }
             else { 
               alert ("Compte ou mot de passe incorrect");
@@ -187,6 +188,9 @@ const RootNavigator = createStackNavigator({
   },
   CreateRoute: {
     screen: CreateRoute
+  },
+  Driver: {
+    screen: Driver
   },
 }, 
 {
