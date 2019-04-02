@@ -24,6 +24,7 @@ import RegisterForm from './RegisterForm';
 import HomeApp from '../HomeApp';
 import CreateRoute from '../route/CreateRoute';
 import Driver from '../driver/Driver';
+import ListRoute from '../reservation/ListRoute';
 
 class Login extends Component {
   /*static navigationOptions = {
@@ -192,9 +193,12 @@ const RootNavigator = createStackNavigator({
   Driver: {
     screen: Driver
   },
+  ListRoute: {
+    screen: ListRoute
+  },
 }, 
 {
-  initialRouteName: 'Login'
+  initialRouteName: 'ListRoute'
 });
 
 export default createAppContainer(RootNavigator);

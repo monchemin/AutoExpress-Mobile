@@ -89,6 +89,10 @@ const Styles = StyleSheet.create({
         flexGrow: 10,
         flexDirection: 'column',
     },
+    subContainerOnRow: {
+        flexGrow: 10,
+        flexDirection: 'row',
+    },
     gameSubContainer: {
         flexGrow: 10,
         flexDirection: 'column',
