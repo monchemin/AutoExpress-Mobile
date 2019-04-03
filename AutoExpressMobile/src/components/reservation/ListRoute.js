@@ -29,10 +29,20 @@ import SearchableDropdown from 'react-native-searchable-dropdown';
 
 import ListRouteSub from './ListRouteSub';
 
+import SearchRoute from './SearchRoute'
+
 import { 
   List, 
   ListItem,
 } from 'react-native-elements';
+
+import { 
+  TabNavigator,
+  createStackNavigator,
+  createAppContainer,
+  StackActions, 
+  NavigationActions
+} from 'react-navigation';
 
 class ListRoute extends Component {
 
@@ -43,6 +53,18 @@ class ListRoute extends Component {
       routeDatas: [],
       routeDatasError: "",
     };
+  }
+
+  callForm(form) {
+    this.props.navigation.navigate(form)
+    /* this.props.navigation.dispatch(StackActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: form, 
+              
+            })
+          ]
+        })) */
   }
 
   componentDidMount() {
@@ -72,9 +94,11 @@ class ListRoute extends Component {
           fromStation={item.fStation}
           toZone={item.tZone}
           toStation={item.tStation}
+          routePrice={item.routePrice}
+          remaningPlace={item.remaningPlace}
         />
       }
-      onPress={() => console.log('Click onPress')}
+      onPress={this.callForm.bind(this,'SearchRoute')}
       leftAvatar={{ source: { uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' } }}
     />
   )
@@ -112,4 +136,18 @@ class ListRoute extends Component {
 	}
 }
 
-export default ListRoute;
+const ListRouteNavigator = createStackNavigator({
+  ListRoute: {
+    screen: ListRoute
+  },
+  SearchRoute: {
+    screen: SearchRoute
+  },
+}, 
+{
+  initialRouteName: 'ListRoute'
+});
+
+export default createAppContainer(ListRouteNavigator);
+
+//export default ListRoute;

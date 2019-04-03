@@ -37,7 +37,7 @@ const Styles = StyleSheet.create({
         color: '#FFFFFF'
     },
     titleMove: {
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: 'bold',
         color: '#8e44ad'
     },
