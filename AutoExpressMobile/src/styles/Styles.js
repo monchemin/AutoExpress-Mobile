@@ -37,7 +37,7 @@ const Styles = StyleSheet.create({
         color: '#FFFFFF'
     },
     titleMove: {
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: 'bold',
         color: '#8e44ad'
     },
@@ -88,6 +88,10 @@ const Styles = StyleSheet.create({
     subContainer: {
         flexGrow: 10,
         flexDirection: 'column',
+    },
+    subContainerOnRow: {
+        flexGrow: 10,
+        flexDirection: 'row',
     },
     gameSubContainer: {
         flexGrow: 10,
@@ -190,6 +194,24 @@ const Styles = StyleSheet.create({
         fontSize: 10,
         fontWeight: 'bold',
         color: '#C60030'
+    },
+    navContainer: {
+    paddingTop: 20,
+    flex: 1
+  },
+    navItemStyle: {
+    padding: 10
+    },
+    navSectionStyle: {
+      backgroundColor: 'lightgrey'
+    },
+    sectionHeadingStyle: {
+      paddingVertical: 10,
+      paddingHorizontal: 5
+    },
+    footerContainer: {
+      padding: 20,
+      backgroundColor: 'lightgrey'
     }
 });
 

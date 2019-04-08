@@ -22,6 +22,9 @@ import {
 import Styles from '../../styles/Styles';
 import RegisterForm from './RegisterForm';
 import HomeApp from '../HomeApp';
+import CreateRoute from '../route/CreateRoute';
+import Driver from '../driver/Driver';
+import ListRoute from '../reservation/ListRoute';
 
 class Login extends Component {
   /*static navigationOptions = {
@@ -45,22 +48,24 @@ class Login extends Component {
     this.props.navigation.dispatch(StackActions.reset({
           index: 0,
           actions: [
-            NavigationActions.navigate({ routeName: form })
+            NavigationActions.navigate({ routeName: form, 
+              params: { userId: this.state.responseData.customerInfo[0].PK } 
+            })
           ]
         }))
   }
 
   authenticationCheck() {
-    //last validation 
+    //last validation
     this.inputControle(this.state.compteInput, 'compteInput');
     this.inputControle(this.state.passwordInput, 'passwordInput');
 
     if (this.state.errorInput === 0) {
       var registerData = JSON.stringify({
-        checkLogin: this.state.compteInput,
-        //customerPassword: this.state.passwordInput
+        login: this.state.compteInput,
+        password: this.state.passwordInput
       });
-      fetch('http://autoexpress.gabways.com/api/customer.php', {
+      fetch('http://autoexpress.gabways.com/api/login.php', {
         method: 'POST',
         headers: { 
          'Accept': 'application/json', 
@@ -71,8 +76,8 @@ class Login extends Component {
         }).then((response) => response.json())
           .then((responseJson) => { 
             this.setState({ responseData: responseJson });
-            if (responseJson.loginExists) {
-              this.callForm('HomeApp');
+            if (responseJson.isLog) {
+              this.callForm('ListRoute');
             }
             else { 
               alert ("Compte ou mot de passe incorrect");
@@ -181,6 +186,15 @@ const RootNavigator = createStackNavigator({
   },
   HomeApp: {
     screen: HomeApp
+  },
+  CreateRoute: {
+    screen: CreateRoute
+  },
+  Driver: {
+    screen: Driver
+  },
+  ListRoute: {
+    screen: ListRoute
   },
 }, 
 {
