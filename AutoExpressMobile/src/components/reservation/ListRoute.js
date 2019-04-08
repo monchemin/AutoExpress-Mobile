@@ -29,7 +29,7 @@ import SearchableDropdown from 'react-native-searchable-dropdown';
 
 import ListRouteSub from './ListRouteSub';
 
-import SearchRoute from './SearchRoute'
+import ReservationRoute from './ReservationRoute'
 
 import { 
   List, 
@@ -55,19 +55,22 @@ class ListRoute extends Component {
     };
   }
 
-  callForm(form) {
-    this.props.navigation.navigate(form)
-    /* this.props.navigation.dispatch(StackActions.reset({
-          index: 0,
-          actions: [
-            NavigationActions.navigate({ routeName: form, 
-              
-            })
-          ]
-        })) */
+  callForm(form, confirmDateHour, confirmFromZone, confrimfromStation, confirmToZone, confrimToStation, confrimPrice, confrimRemaningPlace, confirmRouteId) {
+    this.props.navigation.navigate(form, 
+      {
+        confirmDateHour: confirmDateHour, 
+        confirmFromZone: confirmFromZone, 
+        confrimfromStation : confrimfromStation,
+        confirmToZone: confirmToZone,
+        confrimToStation: confrimToStation,
+        confrimPrice: confrimPrice,
+        confrimRemaningPlace: confrimRemaningPlace,
+        confirmRouteId: confirmRouteId,
+        customerId : this.props.navigation.state.params.userId
+      })
   }
 
-  componentDidMount() {
+  componentDidMount() { //toDo les les parametres de recherche devront etre dans le state pour les utiliser
     fetch('http://autoexpress.gabways.com/api/internalRoutes.php', {
         method: 'GET',
         headers: { 
@@ -87,7 +90,6 @@ class ListRoute extends Component {
   renderItem = ({ item }) => (
     <ListItem
       title={item.routeDate + ' - ' + item.hour}
-      //subtitle={item.fStation}
       subtitle={
         <ListRouteSub
           fromZone={item.fZone}
@@ -98,24 +100,21 @@ class ListRoute extends Component {
           remaningPlace={item.remaningPlace}
         />
       }
-      onPress={this.callForm.bind(this,'SearchRoute')}
+      onPress={this.callForm.bind(this,'ReservationRoute', 
+        item.routeDate + ' - ' + item.hour, 
+        item.fZone,
+        item.fStation,
+        item.tZone,
+        item.tStation,
+        item.routePrice,
+        item.remaningPlace,
+        item.PK
+        )}
       leftAvatar={{ source: { uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' } }}
     />
   )
 
   render() {
-
-    let routess = this.state.routeDatas.map((item, key) => (
-         <ListItem
-            roundAvatar
-            //leftAvatar={{ source: { uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' } }}
-            key={key}
-            title = {item.tStation}
-            subtitle = {item.fStation}
-            onPress={() => console.log('Click onPress')}
-            leftIcon={{ name: 'flight-takeoff' }}
-          />
-        ));
  
     if (this.state.isLoading) {
      return (
@@ -127,6 +126,8 @@ class ListRoute extends Component {
     return (
       <View style={Styles.wrapperGame}>
         <FlatList
+        onRefresh={this.componentDidMount.bind(this)}
+        refreshing={this.state.isLoading}
         keyExtractor={this.keyExtractor}
         data={this.state.routeDatas}
         renderItem={this.renderItem}
@@ -140,8 +141,8 @@ const ListRouteNavigator = createStackNavigator({
   ListRoute: {
     screen: ListRoute
   },
-  SearchRoute: {
-    screen: SearchRoute
+  ReservationRoute: {
+    screen: ReservationRoute
   },
 }, 
 {
@@ -149,5 +150,3 @@ const ListRouteNavigator = createStackNavigator({
 });
 
 export default createAppContainer(ListRouteNavigator);
-
-//export default ListRoute;

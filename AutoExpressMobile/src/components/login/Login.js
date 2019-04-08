@@ -77,7 +77,7 @@ class Login extends Component {
           .then((responseJson) => { 
             this.setState({ responseData: responseJson });
             if (responseJson.isLog) {
-              this.callForm('Driver');
+              this.callForm('ListRoute');
             }
             else { 
               alert ("Compte ou mot de passe incorrect");
@@ -198,7 +198,7 @@ const RootNavigator = createStackNavigator({
   },
 }, 
 {
-  initialRouteName: 'ListRoute'
+  initialRouteName: 'Login'
 });
 
 export default createAppContainer(RootNavigator);

@@ -50,10 +50,10 @@ class ListRouteSub extends Component {
           <Text>{this.props.toStation.toString()}</Text>
         </View>
         <View style={Styles.subContainer}>
-        <Text style={Styles.smallTitleMove}>{this.props.routePrice+' F CFA'}</Text>
-        <View style={Styles.subContainerOnRow}>
-          {remaningPalceIcone}
-        </View>
+          <Text style={Styles.smallTitleMove}>{this.props.routePrice+' F CFA'}</Text>
+          <View style={Styles.subContainerOnRow}>
+            {remaningPalceIcone}
+          </View>
         </View>
       </View>
     );
