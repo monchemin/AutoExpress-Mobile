@@ -56,6 +56,7 @@ class ListRoute extends Component {
   }
 
   callForm(form, confirmDateHour, confirmFromZone, confrimfromStation, confirmToZone, confrimToStation, confrimPrice, confrimRemaningPlace, confirmRouteId) {
+   // console.log('LOl listRoute', this.props);
     this.props.navigation.navigate(form, 
       {
         confirmDateHour: confirmDateHour, 
@@ -66,11 +67,12 @@ class ListRoute extends Component {
         confrimPrice: confrimPrice,
         confrimRemaningPlace: confrimRemaningPlace,
         confirmRouteId: confirmRouteId,
-        customerId : this.props.navigation.state.params.userId
+        customerId : this.props.screenProps.navigation.state.params.userId
       })
   }
 
-  componentDidMount() { //toDo les les parametres de recherche devront etre dans le state pour les utiliser
+  componentDidMount() { //toDo les les parametres de recherche devront etre dans le state pour les utiliser  this.props.navigation.state.params.userId 
+    console.log('LOl listRoute', this.props.screenProps.navigation.state.params.userId);
     fetch('http://autoexpress.gabways.com/api/internalRoutes.php', {
         method: 'GET',
         headers: { 

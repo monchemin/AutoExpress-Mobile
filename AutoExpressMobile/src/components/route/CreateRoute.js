@@ -265,7 +265,9 @@ class CreateRoute extends Component {
     label: "Selectionner heure de départ...",
    };
 
-   
+   const departureStagePlaceholder = {
+    label: "Selectionner lieu de départ...",
+   };
 
    const arrivalStagePlaceholder = {
     label: "Selectionner lieu de d'arrivé...",

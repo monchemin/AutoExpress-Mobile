@@ -212,7 +212,20 @@ const Styles = StyleSheet.create({
     footerContainer: {
       padding: 20,
       backgroundColor: 'lightgrey'
-    }
+    },
+    menuIcon: {
+    paddingLeft: 10
+    },
+    menuButton: {
+    justifyContent: "flex-start",
+    backgroundColor: "white"
+    },
+    menuTitle: {
+    color: "black",
+    margin: 16,
+    fontSize: 16,
+    fontWeight: "500"
+     }
 });
 
 export default Styles;
