@@ -1,5 +1,5 @@
 import {AppRegistry} from 'react-native';
+// import Login from './login/Login';
+import Navigator from'./menu/Navigator'
 
-import Login from './login/Login';
-
-AppRegistry.registerComponent('AutoExpressMobile', () => Login);
+AppRegistry.registerComponent('AutoExpressMobile', () => Navigator);

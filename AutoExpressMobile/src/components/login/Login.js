@@ -17,19 +17,13 @@ import {
   createStackNavigator,
   createAppContainer,
   StackActions, 
-  NavigationActions
+  NavigationActions,
+  createSwitchNavigator,
+  NavigationScreenProp
 } from 'react-navigation';
 import Styles from '../../styles/Styles';
-import RegisterForm from './RegisterForm';
-import HomeApp from '../HomeApp';
-import CreateRoute from '../route/CreateRoute';
-import Driver from '../driver/Driver';
-import ListRoute from '../reservation/ListRoute';
 
 class Login extends Component {
-  /*static navigationOptions = {
-    title: 'Login / Register',
-  };*/
 
   constructor(props) {
     super(props);
@@ -45,14 +39,18 @@ class Login extends Component {
   }
 
   callForm(form) {
-    this.props.navigation.dispatch(StackActions.reset({
+    this.props.navigation.navigate(form,
+    {
+      userId: this.state.responseData.customerInfo[0].PK
+    })
+    /*this.props.navigation.dispatch(StackActions.reset({
           index: 0,
           actions: [
             NavigationActions.navigate({ routeName: form, 
               params: { userId: this.state.responseData.customerInfo[0].PK } 
             })
           ]
-        }))
+        })) */
   }
 
   authenticationCheck() {
@@ -77,7 +75,7 @@ class Login extends Component {
           .then((responseJson) => { 
             this.setState({ responseData: responseJson });
             if (responseJson.isLog) {
-              this.callForm('ListRoute');
+              this.callForm('homeNavigator');
             }
             else { 
               alert ("Compte ou mot de passe incorrect");
@@ -177,7 +175,7 @@ class Login extends Component {
   }
 }
 
-const RootNavigator = createStackNavigator({
+/*const RootNavigator = createSwitchNavigator({
   Login: {
     screen: Login
   },
@@ -199,6 +197,6 @@ const RootNavigator = createStackNavigator({
 }, 
 {
   initialRouteName: 'Login'
-});
-
-export default createAppContainer(RootNavigator);
+}); */
+export default Login;
+// export default createAppContainer(RootNavigator);

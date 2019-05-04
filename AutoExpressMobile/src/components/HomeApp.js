@@ -7,24 +7,19 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
-
-import { 
-  createDrawerNavigator,
-  createAppContainer
-} from 'react-navigation';
+import { Icon } from "react-native-elements";
 
 import Styles from '../styles/Styles';
 
-import HomeSideMenu from './menu/HomeSideMenu';
-import stacknav from './menu/stacknav';
-
 class HomeApp extends Component {
-  /*static navigationOptions = {
-    title: 'Login / Register',
-  };*/
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+   // console.log('LOl homeApp', this.props.navigation.state.params.userId);
+   // console.log('LOl homeApp', this.props.navigation.state);
   }
 
   render() {
@@ -51,14 +46,4 @@ class HomeApp extends Component {
   }
 }
 
-const drawernav = createDrawerNavigator({
-  Item1: {
-      screen: stacknav,
-    }
-  }, {
-    contentComponent: HomeSideMenu,
-    drawerWidth: Dimensions.get('window').width - 120,  
-});
-
-export default createAppContainer(drawernav);
-//export default HomeApp;
+export default HomeApp;
